@@ -27,6 +27,10 @@ def addItem(request):
             category = request.POST.get('category')
             stock = request.POST.get('stock')
             category = Category.objects.get(name=category)
+            #check the name if already exist, don't add the Item
+            if Product.objects.filter(name=name).exists():
+                messages.error(request, "Product already exist")
+                return redirect('index')
             product = Product(name=name, price=price, category=category, stock=stock)
             product.save()
             messages.success(request, "Product added successfully")
