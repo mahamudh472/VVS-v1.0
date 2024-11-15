@@ -58,3 +58,6 @@ def updateItem(request):
             print(sys.exc_info()[0])
             messages.error(request, "Error updating product")
         return redirect('index')
+    
+def home(request):
+    return render(request, 'home.html')
